@@ -8,6 +8,9 @@ package Client;
 // отправка команды, пока не достигнем завершения
 
 
+
+import com.github.tsohr.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
@@ -27,8 +30,17 @@ public class Gamer {
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
+            System.out.print("Введите ваше имя: ");
+            String clientName = scanner.nextLine();
+
+            JSONObject startCommand = new JSONObject();
+            startCommand.put("command", "start");
+            startCommand.put("clientName", clientName);
+            out.println(startCommand.toString());
+
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 }
+
