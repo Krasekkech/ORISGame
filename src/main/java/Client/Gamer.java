@@ -47,6 +47,17 @@ public class Gamer {
                     JSONArray startPoint = jsonResponse.getJSONArray("startPoint");
                     System.out.println("Начальная точка: (" + startPoint.getInt(1) + ", " + startPoint.getInt(1) + ")");
                 }
+
+                System.out.println("Для Вас доступны направления для хода:" + "\n" + "u" + "\n" + "d" + "\n" + "r" + "\n" + "l");
+                String direction = scanner.nextLine();
+                // Отправка направления хода
+                JSONObject directionCommand = new JSONObject();
+                directionCommand.put("command", "direction");
+                directionCommand.put("direction", direction);
+                out.println(directionCommand.toString());
+
+                response = in.readLine();
+                jsonResponse = new JSONObject(response);
             }
 
         } catch (Exception e) {
