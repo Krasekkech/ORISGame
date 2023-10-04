@@ -58,6 +58,15 @@ public class Gamer {
 
                 response = in.readLine();
                 jsonResponse = new JSONObject(response);
+
+                if (jsonResponse.getString("status").equals("go")) {
+                    int result = jsonResponse.getInt("result");
+                    if (result == 0) {
+                        System.out.println("Проход есть, игрок перемещается.");
+                    } else if (result == 1) {
+                        System.out.println("Стена, игрок остается на месте.");
+                    }
+                }
             }
 
         } catch (Exception e) {
