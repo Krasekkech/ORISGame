@@ -9,6 +9,7 @@ package Client;
 
 
 
+import com.github.tsohr.JSONArray;
 import com.github.tsohr.JSONObject;
 
 import java.io.BufferedReader;
@@ -37,6 +38,16 @@ public class Gamer {
             startCommand.put("command", "start");
             startCommand.put("clientName", clientName);
             out.println(startCommand.toString());
+
+            String response = in.readLine();
+            JSONObject jsonResponse = new JSONObject(response);
+            while (response != null) {
+                if (jsonResponse.getString("status").equals("start")) {
+                    System.out.println(jsonResponse.getString("message"));
+                    JSONArray startPoint = jsonResponse.getJSONArray("startPoint");
+                    System.out.println("Начальная точка: (" + startPoint.getInt(1) + ", " + startPoint.getInt(1) + ")");
+                }
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
