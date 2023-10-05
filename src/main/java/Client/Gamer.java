@@ -66,6 +66,21 @@ public class Gamer {
                     } else if (result == 1) {
                         System.out.println("Стена, игрок остается на месте.");
                     }
+                } else if (jsonResponse.getString("status").equals("stop")) {
+                    int steps = Integer.parseInt(jsonResponse.getString("result"));
+                    int minSteps = Integer.parseInt(jsonResponse.getString("min"));
+                    System.out.println("Игрок достиг выхода.");
+                    System.out.println("Количество сделанных шагов: " + steps);
+                    System.out.println("Минимально возможное число шагов: " + minSteps);
+                    JSONArray rating = jsonResponse.getJSONArray("raiting");
+                    System.out.println("Рейтинг игроков:");
+                    for (int i = 0; i < rating.length(); i++) {
+                        JSONObject player = rating.getJSONObject(i);
+                        String name = player.getString("name");
+                        int playerSteps = Integer.parseInt(player.getString("steps"));
+                        int playerMinSteps = Integer.parseInt(player.getString("min"));
+                        System.out.println(name + " - Шагов: " + playerSteps + ", Мин. шагов: " + playerMinSteps);
+                    }
                 }
             }
 
