@@ -84,6 +84,18 @@ public class Gamer {
                 }
             }
 
+            JSONObject stopCommand = new JSONObject();
+            stopCommand.put("command", "stop");
+            out.println(stopCommand.toString());
+
+            response = in.readLine();
+            System.out.println("Сервер завершил соединение.");
+
+
+            in.close();
+            out.close();
+            socket.close();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
